@@ -1,2 +1,6 @@
-# -uqac_8pro135_unity
-First TP game engine 
+# UQAC 8PRO135 unity
+8PRO135 Programmation avec des moteurs de jeu
+
+* Matthieu GUILLEMIN GUIM18120203
+* Marc DIEUDONNE DIEM18070207
+* Lucas GUICHARD GUIL03100205
