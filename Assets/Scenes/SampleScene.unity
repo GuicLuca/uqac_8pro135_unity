@@ -475,7 +475,7 @@ PrefabInstance:
     - target: {fileID: 9097306968189472436, guid: c9c9218c5da4a974b96f03e45e2f44f2,
         type: 3}
       propertyPath: m_Name
-      value: Sphere
+      value: Cube
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9c9218c5da4a974b96f03e45e2f44f2, type: 3}
