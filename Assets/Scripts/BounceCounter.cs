@@ -20,19 +20,21 @@ public class BounceCounter : MonoBehaviour
     {
         if (bounceCounter >= 3)
         {
-            SceneManager.LoadScene("level_3");
+            StartCoroutine(LoadLevel3());
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        audioSource.PlayOneShot(bounce);
-        /*
-        if (bounceCounter == 2)
+        if (bounceCounter < 3)
         {
-            new WaitForSeconds(1);
+            audioSource.PlayOneShot(bounce);
+            bounceCounter++;
         }
-        */
-        bounceCounter++;
+    }
+    private IEnumerator LoadLevel3()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("level_3");
     }
 }
