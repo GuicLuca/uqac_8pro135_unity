@@ -685,7 +685,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009860959}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6a54afdd1c62d87449bb290deec9bdd9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1599,15 +1599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51972754d4bb4b41be8f880e8f649d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e69f70fe-ca0a-4730-b9b3-66027aec8393
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  jumpForce: 5
+  speed: 3
 --- !u!1 &1842942062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1724,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927776768}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6a54afdd1c62d87449bb290deec9bdd9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
