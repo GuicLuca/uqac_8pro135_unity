@@ -1599,11 +1599,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51972754d4bb4b41be8f880e8f649d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move:
-    m_Name: Move
+  moveHorizontal:
+    m_Name: Move Horizontal
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e69f70fe-ca0a-4730-b9b3-66027aec8393
+    m_Id: 0308e74d-4e05-47e5-9970-5e410e59e2e6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  moveVertical:
+    m_Name: Move Vertical
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6113cc7a-4aa5-414b-a493-1facff0ec070
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
