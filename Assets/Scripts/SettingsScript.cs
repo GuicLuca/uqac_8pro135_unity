@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingsScript : MonoBehaviour
 {
     public Dropdown dropdownMenuResolution;
     public Dropdown dropdownMenuQuality;
     public Toggle isFullscreen;
+    public Slider volumeMusicSlider;
+    public AudioMixer soundMixer;
 
     // go back to the main menu
     public void ToMainMenu()
@@ -26,7 +29,9 @@ public class SettingsScript : MonoBehaviour
         //get the string value of the selected index
         string[] resolution = menuOptions[menuIndex].text.Split("x",2);
 
+        Debug.Log(volumeMusicSlider.value);
 
+        setVolume(volumeMusicSlider.value);
         QualitySettings.SetQualityLevel(this.getQualityFromDropDown(), true);
         Screen.SetResolution(int.Parse(resolution.GetValue(0).ToString()), int.Parse(resolution.GetValue(1).ToString()), isFullscreen.isOn);
     }
@@ -39,5 +44,10 @@ public class SettingsScript : MonoBehaviour
          * 2*3 = 6 => very high graphics
         */
         return dropdownMenuQuality.GetComponent<Dropdown>().value * 3;
+    }
+
+    private void setVolume(float volume)
+    {
+        soundMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
     }
 }
