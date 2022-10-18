@@ -1,4 +1,4 @@
-﻿name: Get Unity license activation file
+name: Get Unity license activation file
 
 on: workflow_dispatch
 
@@ -16,3 +16,4 @@ jobs:
         with:
           name: Manual Activation File
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+
