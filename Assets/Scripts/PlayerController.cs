@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     public float jumpForce = 1;
-    public float speed = 3 ; 
-
+    public float speed = 3 ;
 
     void Awake()
     {
@@ -30,9 +29,7 @@ public class PlayerController : MonoBehaviour
         moveHorizontal = player.FindAction("moveHorizontal");
         moveVertical = player.FindAction("moveVertical");
         player.Enable();
-        
     }
-
     private void OnDisable()
     {
         player.FindAction("Jump").performed -= Jump;
@@ -48,7 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(moveHorizontal, moveVertical);
+        Move(moveHorizontal.ReadValue<float>(), moveVertical.ReadValue<float>());
     }
 
     void Jump(InputAction.CallbackContext obj)
@@ -56,10 +53,10 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    void Move(InputAction moveHorizontal, InputAction moveVertical)
+    public Vector3 Move(float moveHorizontal, float moveVertical)
     {
-        Debug.Log(moveVertical.ReadValue<float>());
-        Debug.Log(moveHorizontal.ReadValue<float>());
-        rb.AddForce(new Vector3(moveHorizontal.ReadValue<float>(), 0, moveVertical.ReadValue<float>()) * speed, ForceMode.Force);
+        Vector3 movementVector = new Vector3(moveHorizontal, 0, moveVertical) * speed;
+        rb.AddForce(movementVector, ForceMode.Force);
+        return movementVector;
     }
 }
