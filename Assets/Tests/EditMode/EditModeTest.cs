@@ -14,7 +14,7 @@ public class EditModeTest
         // Initialization
         GameObject gameObject = new GameObject();
         Player player = gameObject.AddComponent<Player>();
-        yield return null;
+        yield return new WaitForSeconds(1f);
         
         // Move N
         Assert.AreEqual(new Vector3(0, 0,player.speed), player.Move(0f, 1f));
