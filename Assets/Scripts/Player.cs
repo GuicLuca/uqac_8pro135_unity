@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float speed = 3 ;
-    public float jumpForce = 1;
+    public float jumpForce = 15;
     
     public Vector3 CalculateJumpVector()
     {
