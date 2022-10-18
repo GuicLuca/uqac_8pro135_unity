@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 
 public class EditModeTest
 {
@@ -48,16 +45,21 @@ public class EditModeTest
         Assert.AreEqual(new Vector3(-player.speed, 0,player.speed), player.Move(-1f, 1f));
         yield return null;
     }
-
-    [Test]
-    public void ChangeMasterVolume()
-    {
-        
-    }
     
-    [Test]
-    public void PlaySoundWhenBounce()
+    [UnityTest]
+    public IEnumerator CounterIncrementation()
     {
+        // Arrange
+        var gameObject = new GameObject();
+        var setings = gameObject.AddComponent<Clicker>();
+        yield return null;
+
+        var initialCount = setings.count;
         
-    }
+        // Acte
+        setings.OnClick();
+        
+        // Assert
+        Assert.AreEqual(initialCount+1, setings.count);
+}
 }
