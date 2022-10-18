@@ -8,12 +8,6 @@ using UnityEngine.UI;
 
 public class PlayModeTest
 {
-    [Test]
-    public void BallFall()
-    {
-        
-    }
-    
     [UnityTest]
     public IEnumerator BallBounceThreeTimes()
     {

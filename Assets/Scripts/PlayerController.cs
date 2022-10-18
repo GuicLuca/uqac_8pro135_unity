@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveVertical;
 
     private Player sphere;
+    private Rigidbody rb;
 
     void Awake()
     {
@@ -18,32 +19,35 @@ public class PlayerController : MonoBehaviour
         player = inputAsset.FindActionMap("Player");
 
         sphere = GetComponent<Player>();
+        rb = GetComponent<Rigidbody>();
     }
     
     private void OnEnable()
     {
-        player.FindAction("Jump").performed += sphere.Jump;
+        player.FindAction("Jump").performed += Jump;
         moveHorizontal = player.FindAction("moveHorizontal");
         moveVertical = player.FindAction("moveVertical");
         player.Enable();
     }
     private void OnDisable()
     {
-        player.FindAction("Jump").performed -= sphere.Jump;
+        player.FindAction("Jump").performed -= Jump;
         player.Disable();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        sphere.Move(moveHorizontal.ReadValue<float>(), moveVertical.ReadValue<float>());
+        Move(moveHorizontal.ReadValue<float>(), moveVertical.ReadValue<float>());
     }
 
-    
+    void Jump(InputAction.CallbackContext obj)
+    {
+        rb.AddForce(sphere.CalculateJumpVector(), ForceMode.Impulse);
+    }
+
+    void Move(float moveHorizontal, float moveVertical)
+    {
+        rb.AddForce(sphere.CalculateMovementVector(moveHorizontal, moveVertical), ForceMode.Force);
+    }
 }
