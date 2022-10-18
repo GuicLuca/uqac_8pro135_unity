@@ -44,16 +44,30 @@ public class EditModeTest
         // Move NW
         Assert.AreEqual(new Vector3(-player.speed, 0,player.speed), player.CalculateMovementVector(-1f, 1f));
         yield return null;
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerJump()
+    {
+        // Initialization
+        GameObject gameObject = new GameObject();
+        Player player = gameObject.AddComponent<Player>();
+        yield return null;
         
         // Jump
         Assert.AreEqual(Vector3.up * player.jumpForce, player.CalculateJumpVector());
         yield return null;
     }
     
-    [Test]
-    public void BallFall()
+    [UnityTest]
+    public IEnumerator ProgressBarStartsEmpty()
     {
+        GameObject gameObject = new GameObject();
+        ProgressBar progressBar = gameObject.AddComponent<ProgressBar>();
+        yield return null;
         
+        Assert.Greater(0, progressBar.GetCurrentFill());
+        yield return null;
     }
     
     [UnityTest]
@@ -71,5 +85,5 @@ public class EditModeTest
         
         // Assert
         Assert.AreEqual(initialCount+1, setings.count);
-}
+    }
 }

@@ -10,6 +10,8 @@ public class ProgressBar : MonoBehaviour
     public float currentTime;
     public Image mask;
     
+    private bool isTesting = true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class ProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isTesting = false;
         GetCurrentFill();
         currentTime += Time.deltaTime;
         if (currentTime >= 3)
@@ -28,9 +31,11 @@ public class ProgressBar : MonoBehaviour
         }
     }
 
-    void GetCurrentFill()
+    public float GetCurrentFill()
     {
         float fillAmount = 1 - (currentTime / totalTime);
-        mask.fillAmount = fillAmount;
+        if(!isTesting)
+            mask.fillAmount = fillAmount;
+        return fillAmount;
     }
 }
