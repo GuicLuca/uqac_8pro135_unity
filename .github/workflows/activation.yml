@@ -1,10 +1,10 @@
-﻿name: Get Unity license activation file 🔐
+﻿name: Get Unity license activation file
 
 on: workflow_dispatch
 
 jobs:
   requestManualActivationFile:
-    name: Request manual activation file 🔑
+    name: Request manual activation file
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,4 +16,3 @@ jobs:
         with:
           name: Manual Activation File
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          
