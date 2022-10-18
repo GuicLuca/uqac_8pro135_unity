@@ -1,8 +1,0 @@
-- name: Checkout
-  uses: actions/checkout@v2.5.0
-- name: Cache
-  uses: actions/cache@v3.0.11
-- name: Unity - Test runner
-  uses: game-ci/unity-test-runner@v2.0.3
-- name: Unity - Builder
-  uses: game-ci/unity-builder@v2.1.2

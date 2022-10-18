@@ -16,3 +16,4 @@ jobs:
         with:
           name: Manual Activation File
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          
