@@ -27,9 +27,7 @@ public class SettingsScript : MonoBehaviour
         //get all options available within this dropdown menu
         List<Dropdown.OptionData> menuOptions = dropdownMenuResolution.GetComponent<Dropdown>().options;
         //get the string value of the selected index
-        string[] resolution = menuOptions[menuIndex].text.Split("x",2);
-
-        Debug.Log(volumeMusicSlider.value);
+        string[] resolution = menuOptions[menuIndex].text.Split("x", 2);
 
         setVolume(volumeMusicSlider.value);
         QualitySettings.SetQualityLevel(this.getQualityFromDropDown(), true);
@@ -46,7 +44,7 @@ public class SettingsScript : MonoBehaviour
         return dropdownMenuQuality.GetComponent<Dropdown>().value * 3;
     }
 
-    private void setVolume(float volume)
+    public void setVolume(float volume)
     {
         soundMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
     }

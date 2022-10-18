@@ -37,4 +37,9 @@ public class BounceCounter : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("level_3");
     }
+
+    public int getBounceCounter()
+    {
+        return this.bounceCounter;
+    }
 }
