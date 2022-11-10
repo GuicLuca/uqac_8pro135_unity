@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameMusic
+  - Platform
+  - Projectile
+  - Key
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Platforms
+  - Background
+  - Enemies
+  - PlayerInvincible
   - 
   - 
   - 
