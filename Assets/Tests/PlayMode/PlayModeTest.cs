@@ -21,6 +21,7 @@ public class PlayModeTest
         yield return null;
     }
 
+    /*
     [UnityTest]
     public IEnumerator FromSceneEndToMenu()
     {
@@ -71,4 +72,5 @@ public class PlayModeTest
         // Assert
         Assert.AreEqual("level_2", SceneManager.GetActiveScene().name);
     }
+    */
 }

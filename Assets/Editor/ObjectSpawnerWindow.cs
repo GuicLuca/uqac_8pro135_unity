@@ -1,3 +1,4 @@
+#if (UNITY_EDITOR)
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using Random = UnityEngine.Random;
 
 public class ObjectSpawnerWindow : EditorWindow
 {
-    private GameObject prefabToSpawn;
-    private GameObject parentInScene;
+    public GameObject prefabToSpawn;
+    public GameObject parentInScene;
     private string newObjectNamePrefix = "spawned_";
-    private int spawnCount = 5;
-    private int spawnedCount = 0;
+    public int spawnCount = 5;
+    public int spawnedCount = 0;
     private int maxSpawnDistance = 40;
     private float minScaleFactor = 0.5f;
     private float maxScaleFactor = 10.0f;
@@ -20,6 +21,12 @@ public class ObjectSpawnerWindow : EditorWindow
     [MenuItem ("Window/Object Spawner Window")]
     public static void  ShowWindow () {
         EditorWindow.GetWindow(typeof(ObjectSpawnerWindow));
+    }
+
+    private void OnEnable()
+    {
+        prefabToSpawn = new GameObject();
+        parentInScene = new GameObject();
     }
 
     void OnGUI () {
@@ -37,23 +44,7 @@ public class ObjectSpawnerWindow : EditorWindow
 
         if(GUILayout.Button("Spawn " + spawnCount + " objects"))
         {
-            for (int i = spawnedCount; i < spawnedCount + spawnCount; i++)
-            {
-                // Get prefab
-                GameObject prefab = prefabToSpawn;
-                // Set random position
-                Vector3 position = new Vector3(Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance));
-                // Set random scale
-                float scaleFactor = Random.Range(minScaleFactor, maxScaleFactor);
-                prefab.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-                // Instantiate the prefab with all this parameters
-                GameObject instantiatedPrefab = Instantiate(prefab, position, Quaternion.identity, parentInScene.transform);
-                // Rename instantiated prefab
-                instantiatedPrefab.name = newObjectNamePrefix + prefab.name + "_" + i;
-            }
-
-            spawnedCount += spawnCount;
-            Debug.Log("Spawned " + spawnCount + " objects for a total of " + spawnedCount + " spawned objects!");
+            InstantiatePrefabs();
         }
 
         EditorGUILayout.LabelField("Spawned count:  " + spawnedCount);
@@ -63,4 +54,26 @@ public class ObjectSpawnerWindow : EditorWindow
             spawnedCount = 0;
         }
     }
+
+    public void InstantiatePrefabs()
+    {
+        for (int i = spawnedCount; i < spawnedCount + spawnCount; i++)
+        {
+            // Get prefab
+            GameObject prefab = prefabToSpawn;
+            // Set random position
+            Vector3 position = new Vector3(Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance));
+            // Set random scale
+            float scaleFactor = Random.Range(minScaleFactor, maxScaleFactor);
+            prefab.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+            // Instantiate the prefab with all this parameters
+            GameObject instantiatedPrefab = Instantiate(prefab, position, Quaternion.identity, parentInScene.transform);
+            // Rename instantiated prefab
+            instantiatedPrefab.name = newObjectNamePrefix + prefab.name + "_" + i;
+        }
+
+        spawnedCount += spawnCount;
+        Debug.Log("Spawned " + spawnCount + " objects for a total of " + spawnedCount + " spawned objects!");
+    }
 }
+#endif

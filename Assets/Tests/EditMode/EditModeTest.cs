@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -85,5 +86,16 @@ public class EditModeTest
         
         // Assert
         Assert.AreEqual(initialCount+1, setings.count);
+    }
+
+    [UnityTest]
+    public IEnumerator Instantiation()
+    {
+        ObjectSpawnerWindow objectSpawnerWindow = (ObjectSpawnerWindow)ScriptableObject.CreateInstance(typeof(ObjectSpawnerWindow));
+        yield return null;
+        int oldSpawnedCount = objectSpawnerWindow.spawnedCount;
+        objectSpawnerWindow.InstantiatePrefabs();
+        yield return null;
+        Assert.AreEqual(objectSpawnerWindow.spawnedCount, oldSpawnedCount + objectSpawnerWindow.spawnCount);
     }
 }
