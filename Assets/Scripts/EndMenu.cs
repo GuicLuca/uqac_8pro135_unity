@@ -7,11 +7,16 @@ public class EndMenu : MonoBehaviour
 {
     public void PlayAgain()
     {
-        SceneManager.LoadScene("level_1");
+        SceneManager.LoadScene("Level1");
     }
     
     public void Menu()
     {
         SceneManager.LoadScene("menu");
+    }
+
+    public void Shaders()
+    {
+        SceneManager.LoadScene("shaders");
     }
 }

@@ -17,22 +17,22 @@ public class MenuScript : MonoBehaviour
         
     }
 
-    // QUite the game
+    // Start playing
+    public void Play()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    // Launch settings menu
+    public void Settings()
+    {
+        SceneManager.LoadScene("settings");
+    }
+    
+    // Quit the game
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Game is exiting");
-    }
-
-    // start playing
-    public void Play()
-    {
-        SceneManager.LoadScene("level_1");
-    }
-
-    // lunch settings menu
-    public void Settings()
-    {
-        SceneManager.LoadScene("settings");
     }
 }

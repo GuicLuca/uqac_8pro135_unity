@@ -6,21 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/HUD.unity
-    guid: 279a8870345208046b22f7aa2b7fe228
+    path: Assets/Scenes/intro.unity
+    guid: 43c0febcd4e4cd5479ab651865049944
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e6a42748a35ed1345846cb86334ea999
+  - enabled: 1
+    path: Assets/Scenes/settings.unity
+    guid: 29d2846e9f3f2ae4294701e1dd279e95
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 80e5ff8fdbb5a084296e97e2731f0bd0
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: d0f1403920648594b866544daef165af
+    path: Assets/Scenes/level_2.unity
+    guid: 8546752e89a02c743a01fd237d19d6f1
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
-    guid: 899e2f9ff7821344489cd9cb15bf1f89
+    path: Assets/Scenes/level_3.unity
+    guid: ff2a15c95a529de4b84cf1a3080e879b
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
-    guid: 3a9fc8842018d014cb7ce22ded4c574c
+    path: Assets/Scenes/end_game.unity
+    guid: 5137e419846ae4d42914ce5c3a41c4dd
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: e6a42748a35ed1345846cb86334ea999
+    path: Assets/Scenes/shaders.unity
+    guid: 99ef92e186e39c64abd4dd65deb87622
   m_configObjects: {}
