@@ -28,10 +28,11 @@ public class SettingsScript : MonoBehaviour
         List<Dropdown.OptionData> menuOptions = dropdownMenuResolution.GetComponent<Dropdown>().options;
         //get the string value of the selected index
         string[] resolution = menuOptions[menuIndex].text.Split('x', '2');
+        Debug.Log(resolution);
 
         setVolume(volumeMusicSlider.value);
         QualitySettings.SetQualityLevel(this.getQualityFromDropDown(), true);
-        Screen.SetResolution(int.Parse(resolution.GetValue(0).ToString()), int.Parse(resolution.GetValue(1).ToString()), isFullscreen.isOn);
+        Screen.SetResolution(1920, 1080, true);
     }
 
     private int getQualityFromDropDown()
