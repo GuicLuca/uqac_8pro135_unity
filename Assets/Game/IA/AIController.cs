@@ -64,7 +64,6 @@ public class AIController : MonoBehaviour
             if (DestinationSuccess)
             {
                 myFunAction();
-                Debug.Log("Function is Random & destination is Success");
             }
             else
             {
