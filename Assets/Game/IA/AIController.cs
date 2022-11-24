@@ -5,23 +5,34 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AIController : MonoBehaviour
-{
+{ 
+//----------------------------------------------- Initialize
+    
+    //Define in Unity Editor the NavMeshAgent of AI instance
     public NavMeshAgent navMeshAgent;
 
+    //Define in Unity Editor which Actor/Player to target
     [SerializeField] public GameObject player;
+    
+    /*This SerializeField allows to develop different state machine in one script
+     In Unity Editor, check the behavior you want the AI get*/
     [SerializeField] public Boolean Follow;
     [SerializeField] public Boolean Preshot;
     [SerializeField] public Boolean Random;
     
+    //This pointer contains the behavior of the AI
     private Action myFunAction = null;
     
+    //Theses values are the offset of the pre-shot behavior
     private static float val = 200;
     private float preshotValX = val;
     private float preshotValZ = val;
+    
+    //DestinationSuccess is a security that allows to check if the AI has reached its destination
     private bool DestinationSuccess;
     private Vector3 randomDestination;
     
-
+//----------------------------------------------- Function
     void Start()
     {
         DestinationSuccess = true;
@@ -41,7 +52,11 @@ public class AIController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame and will start the behavior
+    /// If AI behavior is Random, we will check if AI reached its destination
+    /// If false, wait until AI reached its destination
+    /// </summary>
     void Update()
     {
         if (myFunAction == RandomPlayer)
@@ -61,30 +76,41 @@ public class AIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the next destination at player location
+    /// </summary>
     public void FollowPlayer()
     {
         // Debug.Log("Follow Player Function Called", null);
         navMeshAgent.SetDestination(player.transform.position);
     }
 
+    /// <summary>
+    /// This function should anticipate the next forward location of the player in order to pre-shot him
+    /// </summary>
     public void PreshotPlayer()
     {
-        // Debug.Log("Preshot Player Function Called", null);
         float velX = transform.forward.x * preshotValX ;
         float velZ = transform.forward.z * preshotValZ ;
         Vector3 preshot = new Vector3(velX, player.transform.localPosition.y, velZ);
         navMeshAgent.SetDestination(preshot);
     }
 
+    /// <summary>
+    /// This Function will get an Vector3 from GetRandomGameBoardLocation(), 
+    /// The navMeshAgent will move to this random location
+    /// </summary>
     public void RandomPlayer()
     {
         randomDestination = GetRandomGameBoardLocation();
         navMeshAgent.SetDestination(randomDestination);
         DestinationSuccess = false;
-        // Debug.Log("Random Function Called", null);
-        Debug.Log(randomDestination.ToString());
     }
     
+    /// <summary>
+    /// Search in the NavigationMesh System a random point to reach
+    /// </summary>
+    /// <returns>Vector3 point : the Random point in the NavigationMesh Scene</returns>
     private Vector3 GetRandomGameBoardLocation()
     {
         NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
@@ -115,6 +141,11 @@ public class AIController : MonoBehaviour
         return point;
     }
 
+    /// <summary>
+    /// This function will allow us to know if our AI reached the Destination
+    /// </summary>
+    /// <param name="Destination">It is the Destination for the AI to reach</param>
+    /// <returns>Return a boolean : if the destination is reached ? true : False</returns>
     private bool IsDestinationSuccess(Vector3 Destination)
     {
         bool ret = false;
@@ -125,8 +156,6 @@ public class AIController : MonoBehaviour
             DestinationSuccess = true;
             ret = true;
         }
-        
-        Debug.Log("On Function :: IsDestinationSuccess");
         return ret;
     }
 }
