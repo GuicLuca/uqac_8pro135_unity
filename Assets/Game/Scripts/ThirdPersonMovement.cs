@@ -7,11 +7,17 @@ public class ThirdPersonMovement : MonoBehaviour
     public CharacterController controller;
     public Transform cam;
     public Animator animator;
-    
+    public int totalTitleToWin = 288;
     public float speed = 50f;
 
+    public Material ColoredMaterial;
+    public Material DefaultMaterial;
+    
     public float turnSmoothTime = .1f;
     private float turnSmoothVelocity;
+    private float score = 0;
+    
+    
 
     void Start()
     {
@@ -42,6 +48,47 @@ public class ThirdPersonMovement : MonoBehaviour
         else
         {
             animator.SetBool("isMoving", false);
+        }
+        
+        checkTheGround();
+    }
+
+    void checkTheGround()
+    {
+        /*
+         * Create the hit object
+         * This will later hold the data for the hit
+         * (location, collided collider etc.)
+         */
+        RaycastHit hit;
+        // The ray length.
+        float distance = 10.0f;
+
+        /*
+         * Cast a raycast.
+         * If it hits something:
+         */
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distance))
+        {
+            GameObject obj;
+            obj = hit.collider.gameObject; //Store reference of target to a variable
+            Renderer objRenderer = obj.GetComponent<Renderer>();
+            
+            if (objRenderer.material.name.Contains(DefaultMaterial.name))
+            {
+                Debug.Log("Should change the til material");
+                objRenderer.material = ColoredMaterial; //Set target to new material
+                // increase the score and decreas the total tile to color
+                score += 10;
+                totalTitleToWin -= 1;
+
+                if (totalTitleToWin == 0)
+                {
+                    score += 100;
+                    Debug.Log("LA PARTIE EST FINI");
+                    // TODO STOP THE GAME AND COOL THE RESULT SCREEN
+                }
+            }
         }
     }
 }
