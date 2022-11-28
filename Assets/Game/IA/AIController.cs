@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using Vector3 = UnityEngine.Vector3;
 
 public class AIController : MonoBehaviour
 { 
@@ -13,6 +15,7 @@ public class AIController : MonoBehaviour
 
     //Define in Unity Editor which Actor/Player to target
     [SerializeField] public GameObject player;
+    private ThirdPersonMovement playerScript;
     
     /*This SerializeField allows to develop different state machine in one script
      In Unity Editor, check the behavior you want the AI get*/
@@ -74,7 +77,9 @@ public class AIController : MonoBehaviour
             myFunAction();
         }
     }
-
+    
+//----------------------------------------------- Ghost Behavior
+    
     /// <summary>
     /// Set the next destination at player location
     /// </summary>
@@ -139,7 +144,7 @@ public class AIController : MonoBehaviour
  
         return point;
     }
-
+ 
     /// <summary>
     /// This function will allow us to know if our AI reached the Destination
     /// </summary>
@@ -157,4 +162,27 @@ public class AIController : MonoBehaviour
         }
         return ret;
     }
+    
+//----------------------------------------------- Collision with Player
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject playerObject = GameObject.Find("Ninja");
+        if (playerObject != null)
+        {
+            playerScript = player.GetComponent<ThirdPersonMovement>();
+            if (playerScript.life != 0)
+            {
+                playerScript.life -= 1;
+                
+                this.transform.position = GetRandomGameBoardLocation();
+                Debug.Log("Player life -1");
+            }
+            
+        }
+        
+        
+    }
 }
+
+

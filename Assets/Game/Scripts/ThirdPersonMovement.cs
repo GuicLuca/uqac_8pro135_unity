@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Text scoreText;
 
+    private float score = 0;
+    
+    public int life = 3;
+    
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -52,10 +57,13 @@ public class ThirdPersonMovement : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
         
+        Debug.Log("Life = " + life);
+        
         checkTheGround();
+        CheckLife();
     }
-
-    void checkTheGround()
+    
+    private void checkTheGround()
     {
         /*
          * Create the hit object
@@ -88,9 +96,26 @@ public class ThirdPersonMovement : MonoBehaviour
                 {
                     ScoreManager.currentScore += 100;
                     Debug.Log("LA PARTIE EST FINI");
+                    SceneManager.LoadScene("end_game");
                     // TODO STOP THE GAME AND CALL THE RESULT SCREEN
                 }
             }
+        }
+    }
+
+    private void CheckLife()
+    {
+        if (life == 0)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+        
+        if (this.transform.position.y > 50.0f)
+        {
+            Vector3 resetPosition = new Vector3(this.transform.position.x, 3.1f, 0); 
+            Debug.Log("Reset Position");
+            // this.transform.position = resetPosition;
+            this.transform.position = new Vector3(385.0f, 3.1f, 955.5f);
         }
     }
 }
