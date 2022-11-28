@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Apple;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +11,15 @@ public class ThirdPersonMovement : MonoBehaviour
     public CharacterController controller;
     public Transform cam;
     public Animator animator;
-    public int totalTilesToWin = 288;
-    public float speed = 50f;
+    public int totalTilesToWin = 286;
+    public float speed = 45f;
 
     public Material ColoredMaterial;
     public Material DefaultMaterial;
+    public Material TPMaterial1;
+    public Material TPMaterial2;
+    public GameObject TPDest1;
+    public GameObject TPDest2;
 
 
     public GameObject[] Ennemies;
@@ -68,7 +73,7 @@ public class ThirdPersonMovement : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
         
-        Debug.Log("Life = " + life);
+        //Debug.Log("Life = " + life);
         
         checkTheGround();
         CheckLife();
@@ -100,7 +105,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
             if (objRenderer.material.name.Contains(DefaultMaterial.name))
             {
-                Debug.Log("Should change the til material");
+                //Debug.Log("Should change the til material");
                 objRenderer.material = ColoredMaterial; //Set target to new material
                 // increase the score and decreas the total tile to color
                 ScoreManager.currentScore += 10;
@@ -109,9 +114,14 @@ public class ThirdPersonMovement : MonoBehaviour
                 if (totalTilesToWin == 0)
                 {
                     ScoreManager.currentScore += 100;
-                    Debug.Log("LA PARTIE EST FINI");
                     SceneManager.LoadScene("end_game");
                 }
+            }else if (objRenderer.material.name.Contains(TPMaterial1.name))
+            {
+                this.transform.position = TPDest1.transform.position;
+            }else if (objRenderer.material.name.Contains(TPMaterial2.name))
+            {
+                this.transform.position = TPDest2.transform.position;
             }
         }
     }
