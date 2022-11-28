@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class ThirdPersonMovement : MonoBehaviour
     
     public float turnSmoothTime = .1f;
     private float turnSmoothVelocity;
-    private float score = 0;
-    
-    
+
+    public Text scoreText;
 
     void Start()
     {
@@ -27,6 +27,8 @@ public class ThirdPersonMovement : MonoBehaviour
     
     void Update()
     {
+        scoreText.text = "Score: " + ScoreManager.currentScore;
+        
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
@@ -79,14 +81,14 @@ public class ThirdPersonMovement : MonoBehaviour
                 Debug.Log("Should change the til material");
                 objRenderer.material = ColoredMaterial; //Set target to new material
                 // increase the score and decreas the total tile to color
-                score += 10;
+                ScoreManager.currentScore += 10;
                 totalTitleToWin -= 1;
 
                 if (totalTitleToWin == 0)
                 {
-                    score += 100;
+                    ScoreManager.currentScore += 100;
                     Debug.Log("LA PARTIE EST FINI");
-                    // TODO STOP THE GAME AND COOL THE RESULT SCREEN
+                    // TODO STOP THE GAME AND CALL THE RESULT SCREEN
                 }
             }
         }
