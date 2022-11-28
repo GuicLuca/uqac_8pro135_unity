@@ -12,9 +12,10 @@ public class ScoreManager : MonoBehaviour
 
     public static void SaveScore(string name, float score)
     {
+        leaderboard = StringToDictionary(PlayerPrefs.GetString("leaderboard"));
         string key = $"{name}-{DateTime.Now}";
         leaderboard.Add(key, score);
-        PlayerPrefs.SetString("leaderboard", PlayerPrefs.GetString("leaderboard") + DictionaryToString(leaderboard));
+        PlayerPrefs.SetString("leaderboard", DictionaryToString(leaderboard));
     }
 
     public static string DictionaryToString(Dictionary<string, float> dict)

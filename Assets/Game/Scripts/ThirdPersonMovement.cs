@@ -30,6 +30,8 @@ public class ThirdPersonMovement : MonoBehaviour
     
     void Start()
     {
+        ScoreManager.currentScore = 0;
+        
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
@@ -71,10 +73,8 @@ public class ThirdPersonMovement : MonoBehaviour
         checkTheGround();
         CheckLife();
 
-        /*
         if (Input.GetKeyDown(KeyCode.T))
             SceneManager.LoadScene("end_game");
-        */
     }
     
     private void checkTheGround()

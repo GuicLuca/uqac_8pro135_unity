@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class EndMenu : MonoBehaviour
 {
@@ -11,11 +12,33 @@ public class EndMenu : MonoBehaviour
     public Text scoreText;
     public Text playerName;
     public Button saveScoreButton;
+
+    private bool scoreSaved = false;
+    private string pattern = "^[a-zA-Z0-9]*$";
+    private Match m;
     
     void Start()
     {
         score = ScoreManager.currentScore;
         scoreText.text = "Score: " + score;
+        saveScoreButton.GetComponent<Image>().color = Color.gray;
+        saveScoreButton.enabled = false;
+        scoreSaved = false;
+    }
+
+    void Update()
+    {
+        m = Regex.Match(playerName.text, pattern, RegexOptions.IgnoreCase);
+        if (playerName.text != "" && m.Success && !scoreSaved)
+        {
+            saveScoreButton.GetComponent<Image>().color = Color.green;
+            saveScoreButton.enabled = true;
+        }
+        else
+        {
+            saveScoreButton.GetComponent<Image>().color = Color.gray;
+            saveScoreButton.enabled = false;
+        }
     }
     
     public void PlayAgain()
@@ -30,11 +53,9 @@ public class EndMenu : MonoBehaviour
 
     public void SaveScore()
     {
-        if (playerName.text != "")
-        {
-            ScoreManager.SaveScore(playerName.text, score);
-            saveScoreButton.enabled = false;
-            saveScoreButton.GetComponent<Image>().color = Color.gray;
-        }
+        ScoreManager.SaveScore(playerName.text, score);
+        saveScoreButton.GetComponent<Image>().color = Color.gray;
+        saveScoreButton.enabled = false;
+        scoreSaved = true;
     }
 }
