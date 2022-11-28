@@ -51,10 +51,10 @@ public class ThirdPersonMovement : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
         
+        Debug.Log("Life = " + life);
+        
         checkTheGround();
         CheckLife();
-        
-        
     }
     
     private void checkTheGround()
