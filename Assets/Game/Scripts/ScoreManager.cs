@@ -8,12 +8,34 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static float currentScore = 0;
-    public static Leaderboard C_Leaderboard = new Leaderboard();
+    public static Dictionary<string, float> leaderboard = new Dictionary<string, float>();
 
     public static void SaveScore(string name, float score)
     {
         string key = $"{name}-{DateTime.Now}";
-        C_Leaderboard.leaderboard.Add(key, score);
-        PlayerPrefs.SetString("leaderboard", JsonUtility.ToJson(C_Leaderboard));
+        leaderboard.Add(key, score);
+        PlayerPrefs.SetString("leaderboard", PlayerPrefs.GetString("leaderboard") + DictionaryToString(leaderboard));
+    }
+
+    public static string DictionaryToString(Dictionary<string, float> dict)
+    {
+        string str = "";
+        foreach (var elem in dict)
+        {
+            str += $"{elem.Key}_{elem.Value}*";
+        }
+
+        return str;
+    }
+    
+    public static Dictionary<string, float> StringToDictionary(string str)
+    {
+        Dictionary<string, float> dict = new Dictionary<string, float>();
+        var scores = str.Split('*');
+        for (int i = 0; i < scores.Length - 1; i++)
+        {
+            dict.Add(scores[i].Split('_')[0], float.Parse(scores[i].Split('_')[1]));
+        }
+        return dict;
     }
 }

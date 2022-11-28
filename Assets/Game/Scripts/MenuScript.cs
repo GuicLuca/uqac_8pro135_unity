@@ -18,8 +18,8 @@ public class MenuScript : MonoBehaviour
         Screen.SetResolution(1920, 1080, true);
         
         // Display the 3 best scores in leaderboard
-        Leaderboard C_Leaderboard = JsonUtility.FromJson<Leaderboard>(PlayerPrefs.GetString("leaderboard"));
-        var sortedLeaderboard = from entry in C_Leaderboard.leaderboard orderby entry.Value descending select entry;
+        Dictionary<string, float> leaderboard = ScoreManager.StringToDictionary(PlayerPrefs.GetString("leaderboard"));
+        var sortedLeaderboard = from entry in leaderboard orderby entry.Value descending select entry;
         int i = 1;
         foreach (var leaderboardItem in sortedLeaderboard.Take(3))
         {

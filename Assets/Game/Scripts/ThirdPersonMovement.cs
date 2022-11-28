@@ -70,6 +70,11 @@ public class ThirdPersonMovement : MonoBehaviour
         
         checkTheGround();
         CheckLife();
+
+        /*
+        if (Input.GetKeyDown(KeyCode.T))
+            SceneManager.LoadScene("end_game");
+        */
     }
     
     private void checkTheGround()
