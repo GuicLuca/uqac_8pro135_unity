@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,16 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Material ColoredMaterial;
     public Material DefaultMaterial;
+
+
+    public GameObject[] Ennemies;
     
     public float turnSmoothTime = .1f;
     private float turnSmoothVelocity;
 
     public Text scoreText;
     public Text totalTilesToWinText;
+    public Image bloodyEffect;
     
     public int life = 3;
     
@@ -31,6 +36,10 @@ public class ThirdPersonMovement : MonoBehaviour
     
     void Update()
     {
+        var bloodyEffectColor = bloodyEffect.color;
+        bloodyEffectColor.a = isNearEnemi();
+        bloodyEffect.color = bloodyEffectColor;
+        
         scoreText.text = "Score: " + ScoreManager.currentScore;
         totalTilesToWinText.text = "Tiles to cover: " + totalTilesToWin;
         
@@ -116,5 +125,18 @@ public class ThirdPersonMovement : MonoBehaviour
             // this.transform.position = resetPosition;
             this.transform.position = new Vector3(385.0f, 3.1f, 955.5f);
         }
+    }
+
+    private float isNearEnemi()
+    {
+        foreach (var enemi in Ennemies)
+        {
+            if (Vector3.Distance(enemi.transform.position,transform.position) <= 200)
+            {
+                return 1 - (Vector3.Distance(enemi.transform.position,transform.position) / 200);
+            }
+        }
+
+        return 0;
     }
 }
