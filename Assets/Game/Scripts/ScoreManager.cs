@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static float currentScore = 1222;
+    public static float currentScore = 0;
 
     public static Dictionary<string, float> leaderboard = new Dictionary<string, float>
     {
@@ -18,5 +20,6 @@ public class ScoreManager : MonoBehaviour
     {
         string key = $"{name}-{DateTime.Now}";
         leaderboard.Add(key, score);
+        PlayerPrefs.SetString("leaderboard", leaderboard.Serialize().ToString());
     }
 }

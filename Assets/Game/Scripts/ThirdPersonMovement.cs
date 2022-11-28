@@ -9,7 +9,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public CharacterController controller;
     public Transform cam;
     public Animator animator;
-    public int totalTitleToWin = 288;
+    public int totalTilesToWin = 288;
     public float speed = 50f;
 
     public Material ColoredMaterial;
@@ -19,8 +19,7 @@ public class ThirdPersonMovement : MonoBehaviour
     private float turnSmoothVelocity;
 
     public Text scoreText;
-
-    private float score = 0;
+    public Text totalTilesToWinText;
     
     public int life = 3;
     
@@ -33,6 +32,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + ScoreManager.currentScore;
+        totalTilesToWinText.text = "Tiles to cover: " + totalTilesToWin;
         
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -90,14 +90,13 @@ public class ThirdPersonMovement : MonoBehaviour
                 objRenderer.material = ColoredMaterial; //Set target to new material
                 // increase the score and decreas the total tile to color
                 ScoreManager.currentScore += 10;
-                totalTitleToWin -= 1;
+                totalTilesToWin -= 1;
 
-                if (totalTitleToWin == 0)
+                if (totalTilesToWin == 0)
                 {
                     ScoreManager.currentScore += 100;
                     Debug.Log("LA PARTIE EST FINI");
                     SceneManager.LoadScene("end_game");
-                    // TODO STOP THE GAME AND CALL THE RESULT SCREEN
                 }
             }
         }
@@ -107,7 +106,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         if (life == 0)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("end_game");
         }
         
         if (this.transform.position.y > 50.0f)
