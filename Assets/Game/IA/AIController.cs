@@ -178,8 +178,8 @@ public class AIController : MonoBehaviour
             playerScript = player.GetComponent<ThirdPersonMovement>();
             if (playerScript.life != 0)
             {
-                playerScript.life -= 1;
-                
+                playerScript.LooseLife();
+
                 this.transform.position = GetRandomGameBoardLocation();
                 Debug.Log("Player life -1");
             }

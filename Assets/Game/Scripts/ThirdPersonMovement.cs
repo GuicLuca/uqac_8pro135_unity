@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Apple;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public Animator animator;
     public int totalTilesToWin = 286;
     public float speed = 45f;
+    public int loseScore = 200;
 
     public Material ColoredMaterial;
     public Material DefaultMaterial;
@@ -32,6 +34,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public Image bloodyEffect;
     
     public int life = 3;
+
+    public Image heart1, heart2, heart3;
     
     void Start()
     {
@@ -43,12 +47,26 @@ public class ThirdPersonMovement : MonoBehaviour
     
     void Update()
     {
+        switch (life)
+        {
+            case 1:
+                var h2Color = heart2.color;
+                h2Color.a = 0;
+                heart2.color = h2Color;
+                break;
+            case 2:
+                var h1Color = heart1.color;
+                h1Color.a = 0;
+                heart1.color = h1Color;
+                break;
+        }
+    
         var bloodyEffectColor = bloodyEffect.color;
         bloodyEffectColor.a = isNearEnemi();
         bloodyEffect.color = bloodyEffectColor;
         
-        scoreText.text = "Score: " + ScoreManager.currentScore;
-        totalTilesToWinText.text = "Tiles to cover: " + totalTilesToWin;
+        scoreText.text = ScoreManager.currentScore.ToString();
+        totalTilesToWinText.text = totalTilesToWin.ToString();
         
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -153,5 +171,11 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public void LooseLife()
+    {
+        this.life -= 1;
+        ScoreManager.currentScore -= loseScore;
     }
 }
