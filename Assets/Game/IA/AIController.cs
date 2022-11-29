@@ -17,6 +17,9 @@ public class AIController : MonoBehaviour
     [SerializeField] public GameObject player;
     private ThirdPersonMovement playerScript;
     
+    //Define in Unity Editor the ghost in follow mode
+    [SerializeField] public GameObject ghost;
+    
     /*This SerializeField allows to develop different state machine in one script
      In Unity Editor, check the behavior you want the AI get*/
     [SerializeField] public Boolean Follow;
@@ -76,6 +79,8 @@ public class AIController : MonoBehaviour
         else{
             myFunAction();
         }
+        
+        IsGhostCloseToMe();
     }
     
 //----------------------------------------------- Ghost Behavior
@@ -183,6 +188,21 @@ public class AIController : MonoBehaviour
         
         
     }
+    
+//----------------------------------------------- Collision with Ghost
+
+    private void IsGhostCloseToMe()
+    {
+        float minDistance = 75.0f;
+        float dist = Vector3.Distance(ghost.transform.position, this.transform.position);
+        
+        if (dist < minDistance)
+        {
+            this.transform.position = GetRandomGameBoardLocation();
+            Debug.Log("Ghost TP");
+        }
+    }
+
 }
 
 
