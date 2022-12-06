@@ -4,10 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Platform
-  - Projectile
-  - Key
-  - Enemy
+  - Shootable
   layers:
   - Default
   - TransparentFX
@@ -17,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Platforms
-  - Background
-  - Enemies
-  - PlayerInvincible
+  - Lighting
+  - Ground
+  - Postprocessing
+  - 
+  - 
   - 
   - 
   - 
@@ -42,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
