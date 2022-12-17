@@ -20,7 +20,7 @@
 #### Code :
 ![Audio source code](Screens/SoundProblem.png)
 #### Description :
-Le problème au niveau du son est que le jeu instancie 400 éléments qui sont tous démaré en même temps. Pour corriger cela il suffit de retirer la boucle.
+Le problème au niveau du son est que le jeu instancie 400 éléments qui sont tous démarré en même temps. Pour corriger cela il suffit de retirer la boucle.
 
 <br><br>
 
@@ -29,4 +29,4 @@ Le problème au niveau du son est que le jeu instancie 400 éléments qui sont t
 #### Code :
 ![Audio source code](Screens/WallsProblem.png)
 #### Description :
-Le problème avec les mure est qu'ils sont instancié en boucle à cause d'une coroutine récursive. Pour corriger l'erreur on retire l'appel à la coroutine car les mure s'instencient automatiquement dans le level.
+Le problème avec les murs est qu'ils sont instanciés en boucle à cause d'une coroutine récursive. Pour corriger l'erreur on retire l'appel à la coroutine car les murs s'instancient automatiquement dans le level.
