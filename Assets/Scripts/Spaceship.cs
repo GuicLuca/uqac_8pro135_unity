@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,10 @@ public class Spaceship : MonoBehaviour
     public float rotationSpeed = 2f;
     public float cameraSmooth = 4f;
     public RectTransform crosshairTexture;
+    public ObjectPool objectPool;
+    public Transform bulletSpawner;
+    public float fireRate = 0.25f;
+    public AudioSource audioSource;
 
     float speed;
     Rigidbody r;
@@ -25,10 +30,13 @@ public class Spaceship : MonoBehaviour
     float mouseXSmooth = 0;
     float mouseYSmooth = 0;
     Vector3 defaultShipRotation;
+    private float nextFire = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        
         r = GetComponent<Rigidbody>();
         r.useGravity = false;
         lookRotation = transform.rotation;
@@ -89,6 +97,21 @@ public class Spaceship : MonoBehaviour
         if (crosshairTexture)
         {
             crosshairTexture.position = mainCamera.WorldToScreenPoint(transform.position + transform.forward * 100);
+        }
+
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject bullet = ObjectPool.Instance.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.position = bulletSpawner.position;
+                bullet.transform.rotation = transform.rotation;
+                bullet.SetActive(true);
+                bullet.GetComponent<Bullet>().SetForwardVector(transform);
+                audioSource.PlayOneShot(audioSource.clip);
+                bullet.GetComponent<Bullet>().destroyTime = Time.time + bullet.GetComponent<Bullet>().lifeTime;
+            }
         }
     }
     

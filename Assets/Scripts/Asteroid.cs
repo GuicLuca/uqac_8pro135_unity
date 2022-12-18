@@ -40,4 +40,13 @@ public class Asteroid : MonoBehaviour
         position.x += movementSpeed * Time.deltaTime;
         asteroidTransform.position = new Vector3(position.x, asteroidYDefaultPosition, asteroidZDefaultPosition);
     }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {   
+            collision.gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
 }

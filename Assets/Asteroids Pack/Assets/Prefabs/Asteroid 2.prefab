@@ -91,12 +91,11 @@ GameObject:
   m_Component:
   - component: {fileID: 446090}
   - component: {fileID: 5499024}
-  - component: {fileID: 11421226}
   - component: {fileID: -6459055132620682202}
   - component: {fileID: 3165164130854524205}
   m_Layer: 0
   m_Name: Asteroid 2
-  m_TagString: Enemy
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 141316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 11.692194, y: 11.692194, z: 11.692194}
+  m_LocalScale: {x: 10.669406, y: 10.669406, z: 10.669406}
   m_Children:
   - {fileID: 453352}
   m_Father: {fileID: 0}
@@ -131,20 +130,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &11421226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a718c138b20419b499c3d92b17e6ff7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tumble: 0.25
+  m_CollisionDetection: 1
 --- !u!65 &-6459055132620682202
 BoxCollider:
   m_ObjectHideFlags: 0
