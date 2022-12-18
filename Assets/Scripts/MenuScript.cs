@@ -17,7 +17,7 @@ public class MenuScript : MonoBehaviour
     // Start playing
     public void Play()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Space");
     }
 
     // Launch settings menu

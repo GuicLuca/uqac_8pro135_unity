@@ -8,7 +8,9 @@ using Random = UnityEngine.Random;
 
 public class ObjectSpawnerWindow : EditorWindow
 {
-    public GameObject prefabToSpawn;
+    public GameObject prefab1ToSpawn;
+    public GameObject prefab2ToSpawn;
+    public GameObject prefab3ToSpawn;
     public GameObject parentInScene;
     private string newObjectNamePrefix = "spawned_";
     public int spawnCount = 5;
@@ -25,13 +27,17 @@ public class ObjectSpawnerWindow : EditorWindow
 
     private void OnEnable()
     {
-        prefabToSpawn = new GameObject();
+        prefab1ToSpawn = new GameObject();
+        prefab2ToSpawn = new GameObject();
+        prefab3ToSpawn = new GameObject();
         parentInScene = new GameObject();
     }
 
     void OnGUI () {
         GUILayout.Label ("What to spawn", EditorStyles.boldLabel);
-        prefabToSpawn = EditorGUILayout.ObjectField("Prefab to spawn", prefabToSpawn, typeof(GameObject), false) as GameObject;
+        prefab1ToSpawn = EditorGUILayout.ObjectField("Prefab 1 to spawn", prefab1ToSpawn, typeof(GameObject), false) as GameObject;
+        prefab2ToSpawn = EditorGUILayout.ObjectField("Prefab 2 to spawn", prefab2ToSpawn, typeof(GameObject), false) as GameObject;
+        prefab3ToSpawn = EditorGUILayout.ObjectField("Prefab 3 to spawn", prefab3ToSpawn, typeof(GameObject), false) as GameObject;
         parentInScene = EditorGUILayout.ObjectField("Parent in scene", parentInScene, typeof(GameObject), true) as GameObject;
         
         GUILayout.Label ("Spawn options", EditorStyles.boldLabel);
@@ -57,17 +63,35 @@ public class ObjectSpawnerWindow : EditorWindow
 
     public void InstantiatePrefabs()
     {
+        int r = 0;
+        GameObject prefab;
         for (int i = spawnedCount; i < spawnedCount + spawnCount; i++)
         {
-            // Get prefab
-            GameObject prefab = prefabToSpawn;
+            // Select random prefab
+            r = Random.Range(1, 4);
+            switch (r)
+            {
+                case 1:
+                    prefab = prefab1ToSpawn;
+                    break;
+                case 2:
+                    prefab = prefab2ToSpawn;
+                    break;
+                case 3:
+                    prefab = prefab3ToSpawn;
+                    break;
+                default:
+                    prefab = prefab1ToSpawn;
+                    break;
+            }
+            
             // Set random position
             Vector3 position = new Vector3(Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance), Random.Range(-maxSpawnDistance, maxSpawnDistance));
             // Set random scale
             float scaleFactor = Random.Range(minScaleFactor, maxScaleFactor);
             prefab.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
             // Instantiate the prefab with all this parameters
-            GameObject instantiatedPrefab = Instantiate(prefab, position, Quaternion.identity, parentInScene.transform);
+            GameObject instantiatedPrefab = Instantiate(prefab, position, Random.rotation, parentInScene.transform);
             // Rename instantiated prefab
             instantiatedPrefab.name = newObjectNamePrefix + prefab.name + "_" + i;
         }
