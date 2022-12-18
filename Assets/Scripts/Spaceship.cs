@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 
@@ -119,4 +120,5 @@ public class Spaceship : MonoBehaviour
     {
         SceneManager.LoadScene("EndScreen");
     }
+    
 }

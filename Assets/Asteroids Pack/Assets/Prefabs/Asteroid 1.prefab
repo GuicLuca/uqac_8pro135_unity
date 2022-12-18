@@ -251,7 +251,7 @@ Transform:
   m_GameObject: {fileID: 151664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.186691, y: 5.186691, z: 5.186691}
+  m_LocalScale: {x: 10.026845, y: 10.026845, z: 10.026845}
   m_Children:
   - {fileID: 488002}
   m_Father: {fileID: 0}
@@ -301,6 +301,8 @@ MonoBehaviour:
   asteroidRoot: {fileID: 0}
   rotationSpeed: 10
   movementSpeed: 1
+  explosion: {fileID: 4641984292193266446, guid: 09f821d95368b15438035d084b97b466,
+    type: 3}
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0

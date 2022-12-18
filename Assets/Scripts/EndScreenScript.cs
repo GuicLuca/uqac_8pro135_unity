@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class EndScreenScript : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class EndScreenScript : MonoBehaviour
         
         score = ScoreManager.currentScore;
         scoreText.text = "Score: " + score;
+
+        ScoreManager.currentScore = 0;
     }
     
     public void PlayAgain()
