@@ -9,7 +9,7 @@ public class Asteroid : MonoBehaviour
 {
     public Transform asteroidRoot;
     public float rotationSpeed = 10f;
-    public float movementSpeed = 2f;
+    public float movementSpeed = 5f;
     public ParticleSystem explosion;
 
     public Transform ship;
